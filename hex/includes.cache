@@ -10,17 +10,17 @@
     "Includepath": "E:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard"
   },
   {
-    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\ditmecuocdoigpt.ino.cpp",
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\rebuildgew.ino.cpp",
     "Include": "SoftwareSerial.h",
     "Includepath": "E:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SoftwareSerial\\src"
   },
   {
-    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\ditmecuocdoigpt.ino.cpp",
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\rebuildgew.ino.cpp",
     "Include": "Servo.h",
     "Includepath": "E:\\Program Files (x86)\\Arduino\\libraries\\Servo\\src"
   },
   {
-    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\ditmecuocdoigpt.ino.cpp",
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\rebuildgew.ino.cpp",
     "Include": "",
     "Includepath": null
   },

@@ -1,6 +1,5 @@
-# 1 "F:\\KMA\\Arduino\\rebuildgew\\rebuildgew\\rebuildgew.ino"
-# 2 "F:\\KMA\\Arduino\\rebuildgew\\rebuildgew\\rebuildgew.ino" 2
-# 3 "F:\\KMA\\Arduino\\rebuildgew\\rebuildgew\\rebuildgew.ino" 2
+#include "SoftwareSerial.h"
+#include <Servo.h>;
 Servo myServo;
 int servoPin = 7;
 
@@ -12,9 +11,9 @@ int IN3 = 10;
 int IN4 = 9;
 int ENB = 8;
 
-float Duration; //thoi gian
+float  Duration; //thoi gian
 float Distance; //khoang cach
-
+#define MAX_DISTANCE 25
 float Distance_Left; //Kc trai
 float Distance_Right; //Kc phai
 int last = 0;
@@ -44,18 +43,18 @@ long duration, distance;
 void setup() {
   HC05.begin(9600);
   Serial.begin(9600);
-  pinMode(IN1, 0x1);
-  pinMode(IN2, 0x1);
-  pinMode(IN3, 0x1);
-  pinMode(IN4, 0x1);
-  pinMode(ENA, 0x1);
-  pinMode(ENB, 0x1);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
 
   analogWrite(ENA, Speed);
   analogWrite(ENB, Speed);
 
-  pinMode(trigPin, 0x1);
-  pinMode(echoPin, 0x0);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   last = millis();
   //Serial.begin(9600);
 
@@ -80,7 +79,7 @@ void loop() {
 void handleMode() {
     Serial.print("receive: ");
     Serial.println(command);
-
+    
     if(command == 'F'){
       Serial.println("Mode now: CONTROL MANUAL");
       mode= MANUAL;
@@ -88,7 +87,7 @@ void handleMode() {
       Serial.println("Mode now: AUTO");
       mode = AUTO;
     }
-
+    
     Serial.println(mode);
 }
 
@@ -117,7 +116,7 @@ void Auto_Mode() {
     {
       if (Distance_Left < Distance_Right) // nếu khoảng cách trái < khoang cach phai
       {
-        phai(); // xe chạy sang phai
+        phai();  // xe chạy sang phai
         Serial.println("Phai");
         delay(300);
       }
@@ -158,14 +157,14 @@ void Control_Mode() {
 
 void KC()
 {
-  digitalWrite(trigPin, 0x0); // tat chan trig
+  digitalWrite(trigPin, LOW); // tat chan trig
   delayMicroseconds(2);
-  digitalWrite(trigPin, 0x1); // phat xung tu chan trig
+  digitalWrite(trigPin, HIGH); // phat xung tu chan trig
   delayMicroseconds(10);
-  digitalWrite(trigPin, 0x0); // tat chan trig
+  digitalWrite(trigPin, LOW); // tat chan trig
 
-  Duration = pulseIn(echoPin, 0x1);
-  Distance = Duration / 2 / 29.412;
+  Duration = pulseIn(echoPin, HIGH);
+  Distance =  Duration / 2 / 29.412;
   Serial.print("Distance: ");
   Serial.println(Distance);
 
@@ -195,72 +194,72 @@ void SvPhai() // quay servo sang phai
 
 void tien() {
 Serial.println("tien");
-  digitalWrite(IN1, 0x1);
-  digitalWrite(IN2, 0x0);
-  digitalWrite(IN3, 0x1);
-  digitalWrite(IN4, 0x0);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 }
 
 void lui() {
   Serial.println("lui");
-  digitalWrite(IN1, 0x0);
-  digitalWrite(IN2, 0x1);
-  digitalWrite(IN3, 0x0);
-  digitalWrite(IN4, 0x1);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
 }
 
 void phai() {
 Serial.println("phai");
-  digitalWrite(IN1, 0x1);
-  digitalWrite(IN2, 0x0);
-  digitalWrite(IN3, 0x0);
-  digitalWrite(IN4, 0x1);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
 }
 
 void trai() {
 Serial.println("trai");
-  digitalWrite(IN1, 0x0);
-  digitalWrite(IN2, 0x1);
-  digitalWrite(IN3, 0x1);
-  digitalWrite(IN4, 0x0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 }
 
 void tien_trai() {
 
-  digitalWrite(IN1, 0x0);
-  digitalWrite(IN2, 0x0);
-  digitalWrite(IN3, 0x1);
-  digitalWrite(IN4, 0x0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 }
 
 void tien_phai() {
 
-  digitalWrite(IN1, 0x1);
-  digitalWrite(IN2, 0x0);
-  digitalWrite(IN3, 0x0);
-  digitalWrite(IN4, 0x0);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
 }
 
 void lui_trai() {
 
-  digitalWrite(IN1, 0x0);
-  digitalWrite(IN2, 0x0);
-  digitalWrite(IN3, 0x0);
-  digitalWrite(IN4, 0x1);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
 }
 
 void lui_phai() {
 
-  digitalWrite(IN1, 0x0);
-  digitalWrite(IN2, 0x1);
-  digitalWrite(IN3, 0x0);
-  digitalWrite(IN4, 0x0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
 }
 
 void Stop() {
   Serial.println("dung lai");
-  digitalWrite(IN1, 0x0);
-  digitalWrite(IN2, 0x0);
-  digitalWrite(IN3, 0x0);
-  digitalWrite(IN4, 0x0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
 }

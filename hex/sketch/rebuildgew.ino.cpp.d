@@ -1,5 +1,5 @@
-F:\KMA\Arduino\hex\sketch\ditmecuocdoigpt.ino.cpp.o: \
- F:\KMA\Arduino\hex\sketch\ditmecuocdoigpt.ino.cpp \
+F:\KMA\Arduino\hex\sketch\rebuildgew.ino.cpp.o: \
+ F:\KMA\Arduino\hex\sketch\rebuildgew.ino.cpp \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
