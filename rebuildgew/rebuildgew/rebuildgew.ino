@@ -1,5 +1,6 @@
 #include "SoftwareSerial.h"
 #include <Servo.h>;
+#include <NewPing.h>
 Servo myServo;
 int servoPin = 7;
 
@@ -11,9 +12,11 @@ int IN3 = 10;
 int IN4 = 9;
 int ENB = 8;
 
+
 float  Duration; //thoi gian
 float Distance; //khoang cach
 #define MAX_DISTANCE 25
+#define maximum_distance 200
 float Distance_Left; //Kc trai
 float Distance_Right; //Kc phai
 int last = 0;
@@ -34,6 +37,8 @@ CarMode mode = MANUAL;
 
 const int trigPin = 6;
 const int echoPin = 5;
+NewPing sonar(trigPin, echoPin, maximum_distance);
+
 unsigned long thoigian;
 int khoangcach;
 int khoangcachtrai, khoangcachphai;
@@ -55,10 +60,20 @@ void setup() {
 
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  last = millis();
+  //last = millis();
   //Serial.begin(9600);
 
   myServo.attach(servoPin);
+
+  delay(2000);
+  distance = readPing();
+  delay(100);
+  distance = readPing();
+  delay(100);
+  distance = readPing();
+  delay(100);
+  distance = readPing();
+  delay(100);
 }
 
 void loop() {
@@ -71,24 +86,80 @@ void loop() {
   }
 
   if (mode == AUTO) {
-    Auto_Mode();
+    //Auto_Mode();
+    Auto_avoid();
   }
 
 }
 
 void handleMode() {
-    Serial.print("receive: ");
-    Serial.println(command);
-    
-    if(command == 'F'){
-      Serial.println("Mode now: CONTROL MANUAL");
-      mode= MANUAL;
-    } else if(command == 'J'){
-      Serial.println("Mode now: AUTO");
-      mode = AUTO;
+  Serial.print("receive: ");
+  Serial.println(command);
+
+  if (command == 'F') {
+    Serial.println("Mode now: CONTROL MANUAL");
+    mode = MANUAL;
+  } else if (command == 'J') {
+    Serial.println("Mode now: AUTO");
+    mode = AUTO;
+  }
+
+  Serial.println(mode);
+}
+
+
+void Auto_avoid() {
+  Serial.println("auto avoiding");
+  int distanceRight = 0;
+  int distanceLeft = 0;
+  delay(50);
+
+  if (distance <= 45) {
+    Stop();
+    delay(300);
+    lui();
+    delay(400);
+    Stop();
+    delay(300);
+    distanceRight = lookRight();
+    delay(300);
+    distanceLeft = lookLeft();
+    delay(300);
+
+    if (distance >= distanceLeft) {
+      phai();
+      Stop();
     }
-    
-    Serial.println(mode);
+    else {
+      trai();
+      Stop();
+    }
+  }
+  else {
+    tien();
+  }
+  distance = readPing();
+  Serial.print("Distance ");
+  Serial.println(distance);
+}
+
+int lookRight() {
+  myServo.write(30);
+  delay(500);
+  int distance = readPing();
+  delay(100);
+  myServo.write(85);
+  return distance;
+}
+
+int lookLeft() {
+  myServo.write(150);
+  delay(500);
+  int distance = readPing();
+  delay(100);
+  myServo.write(85);
+  return distance;
+  delay(100);
 }
 
 void Auto_Mode() {
@@ -153,7 +224,14 @@ void Control_Mode() {
   }
 }
 
-
+int readPing() {
+  delay(70);
+  int cm = sonar.ping_cm();
+  if (cm == 0) {
+    cm = 250;
+  }
+  return cm;
+}
 
 void KC()
 {
@@ -193,7 +271,7 @@ void SvPhai() // quay servo sang phai
 
 
 void tien() {
-Serial.println("tien");
+  Serial.println("tien");
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, HIGH);
@@ -209,7 +287,7 @@ void lui() {
 }
 
 void phai() {
-Serial.println("phai");
+  Serial.println("phai");
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
@@ -217,7 +295,7 @@ Serial.println("phai");
 }
 
 void trai() {
-Serial.println("trai");
+  Serial.println("trai");
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);

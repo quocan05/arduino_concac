@@ -10,17 +10,22 @@
     "Includepath": "E:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard"
   },
   {
-    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\rebuildgew.ino.cpp",
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\gew.ino.cpp",
     "Include": "SoftwareSerial.h",
     "Includepath": "E:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SoftwareSerial\\src"
   },
   {
-    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\rebuildgew.ino.cpp",
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\gew.ino.cpp",
     "Include": "Servo.h",
     "Includepath": "E:\\Program Files (x86)\\Arduino\\libraries\\Servo\\src"
   },
   {
-    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\rebuildgew.ino.cpp",
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\gew.ino.cpp",
+    "Include": "NewPing.h",
+    "Includepath": "F:\\KMA\\Arduino\\libraries\\NewPing\\src"
+  },
+  {
+    "Sourcefile": "F:\\KMA\\Arduino\\hex\\sketch\\gew.ino.cpp",
     "Include": "",
     "Includepath": null
   },
@@ -61,6 +66,11 @@
   },
   {
     "Sourcefile": "E:\\Program Files (x86)\\Arduino\\libraries\\Servo\\src\\stm32f4\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "F:\\KMA\\Arduino\\libraries\\NewPing\\src\\NewPing.cpp",
     "Include": "",
     "Includepath": null
   }

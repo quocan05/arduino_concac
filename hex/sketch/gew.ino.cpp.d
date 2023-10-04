@@ -1,5 +1,5 @@
-F:\KMA\Arduino\hex\sketch\rebuildgew.ino.cpp.o: \
- F:\KMA\Arduino\hex\sketch\rebuildgew.ino.cpp \
+F:\KMA\Arduino\hex\sketch\gew.ino.cpp.o: \
+ F:\KMA\Arduino\hex\sketch\gew.ino.cpp \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -14,4 +14,5 @@ F:\KMA\Arduino\hex\sketch\rebuildgew.ino.cpp.o: \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src/SoftwareSerial.h \
  E:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
  E:\Program\ Files\ (x86)\Arduino\libraries\Servo\src/Servo.h \
- E:\Program\ Files\ (x86)\Arduino\libraries\Servo\src/avr/ServoTimers.h
+ E:\Program\ Files\ (x86)\Arduino\libraries\Servo\src/avr/ServoTimers.h \
+ F:\KMA\Arduino\libraries\NewPing\src/NewPing.h
